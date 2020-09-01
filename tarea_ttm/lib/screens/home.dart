@@ -33,12 +33,12 @@ class _HomeScreenState extends State<HomeScreen> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Text('Logout'),
         color: Colors.pink[800],
+        textColor: Colors.white,
         onPressed: () => {
           _eliminarDatos(),
           print('Datos eliminados'),
           Navigator.of(context).pushReplacementNamed(LoginScreen.tag)
         },
-        textColor: Colors.white,
       ),
     );
   }
