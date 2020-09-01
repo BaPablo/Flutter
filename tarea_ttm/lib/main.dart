@@ -1,24 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tarea_ttm/screens/home.dart';
 import 'package:tarea_ttm/screens/login.dart';
-import 'package:provider/provider.dart';
 
-void main() {
-  runApp(MyApp());
-}
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var user = prefs.getString('username');
+  print(user);
 
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  bool _logged = false;
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(routes: {
-      '/': (BuildContext context) {
-        if (_logged) {
-          return HomeScreen();
-        } else
-          return LoginScreen();
-      }
-    });
-  }
+  runApp(MaterialApp(home: user == null ? LoginScreen() : HomeScreen()));
 }
