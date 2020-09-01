@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:tarea_ttm/screens/home.dart';
 import 'package:tarea_ttm/utils/data.dart';
 
 class LoginScreen extends StatefulWidget {
+  static String tag = '/login';
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -89,6 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
             {
               print('Login correcto'),
               _guardarDatos(),
+              Navigator.of(context).pushReplacementNamed(HomeScreen.tag)
             }
           else
             {print('Advertencia login incorrecto')}

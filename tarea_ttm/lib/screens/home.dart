@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:tarea_ttm/screens/login.dart';
 import 'package:tarea_ttm/utils/data.dart';
 
 class HomeScreen extends StatefulWidget {
+  static String tag = '/home';
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -16,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('sdfsdf'),
+        title: Text('Home'),
       ),
       body: Center(
         child: _logOutBtn(),
@@ -34,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: () => {
           _eliminarDatos(),
           print('Datos eliminados'),
+          Navigator.of(context).pushReplacementNamed(LoginScreen.tag)
         },
         textColor: Colors.white,
       ),
