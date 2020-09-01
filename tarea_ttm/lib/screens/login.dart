@@ -17,16 +17,16 @@ class LoginScreen extends StatelessWidget {
       ),
       body: ListView(
         children: <Widget>[
-          _readUserName(),
-          _readPassword(),
-          _login(context),
+          _buildUsernameField(),
+          _buildPasswordField(),
+          _buildLoginBtn(context),
         ],
       ),
     );
   }
 }
 
-Widget _readUserName() {
+Widget _buildUsernameField() {
   return Container(
     child: TextFormField(
       controller: userNameController,
@@ -44,7 +44,7 @@ Widget _readUserName() {
   );
 }
 
-Widget _readPassword() {
+Widget _buildPasswordField() {
   return Container(
     alignment: Alignment.center,
     child: TextFormField(
@@ -64,7 +64,7 @@ Widget _readPassword() {
   );
 }
 
-Widget _login(context) {
+Widget _buildLoginBtn(context) {
   return SizedBox(
     width: 220,
     child: RaisedButton(
@@ -74,12 +74,17 @@ Widget _login(context) {
       onPressed: () => {
         print(userNameController.text),
         print(passwordController.text),
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => HomeScreen(),
-          ),
-        ),
+        if (userNameController.text == 'John')
+          {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomeScreen(),
+              ),
+            ),
+          }
+        else
+          {print('Advertencia login incorrecto')}
       },
       textColor: Colors.white,
     ),
