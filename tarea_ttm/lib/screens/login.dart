@@ -28,7 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.tealAccent[300],
+        backgroundColor: Colors.deepPurple[300],
         title: Text(
           'Login',
           textAlign: TextAlign.center,
@@ -88,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
       child: RaisedButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Text('Iniciar sesión'),
-        color: Colors.lightBlue[600],
+        color: Colors.deepPurple,
         textColor: Colors.white,
         onPressed: () => {
           print('Username: ' + usernameController.text),

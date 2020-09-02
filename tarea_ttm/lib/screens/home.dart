@@ -19,9 +19,23 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Home'),
+        backgroundColor: Colors.deepPurple[300],
       ),
       body: Center(
-        child: _logOutBtn(),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              'Bienvenido a la página de inicio',
+            ),
+            Divider(
+              color: Colors.deepPurple[300],
+              thickness: 1,
+            ),
+            _logOutBtn(),
+          ],
+        ),
       ),
     );
   }
@@ -32,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: RaisedButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Text('Logout'),
-        color: Colors.pink[800],
+        color: Colors.red[600],
         textColor: Colors.white,
         onPressed: () => {
           _eliminarDatos(),
