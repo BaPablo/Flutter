@@ -1,42 +1,96 @@
 import 'dart:convert';
-import 'package:tarea2_ttm/models/hero.dart' as hero;
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:async';
+import 'package:tarea2_ttm/services/hero_service.dart';
+import 'package:tarea2_ttm/utils/connected.dart';
+import 'package:tarea2_ttm/models/heroes.dart';
+import 'package:tarea2_ttm/utils/hex_to_color_util.dart';
+import 'package:tarea2_ttm/utils/json_icon_util.dart';
 
-class HomeScreen extends StatelessWidget {
-  final String urlJSON = 'https://www.hectoralvarez.dev/icc727/heroes.json';
-  final Map<String, String> _headers = {
-    'Content-Type': 'application/json',
-    'Authorization': 'something'
-  };
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  String mensajeConn = '';
+  Heroes heroes = Heroes();
+
+  void checkConn() async {
+    bool connectionAvailable = await Connected().isConnected();
+
+    (connectionAvailable)
+        ? this.mensajeConn = 'Si hay conexión'
+        : this.mensajeConn = 'No hay conexión';
+
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: Text('Tarea 2'),
       ),
-      body: ListView(
-        children: [
-          _hero(),
-          RaisedButton(
-            onPressed: getHeroes,
-            child: Text('Press me bro'),
+      body: Container(
+        child: _showHeroes(),
+      ),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          FloatingActionButton(
+            heroTag: 'btnList',
+            backgroundColor: Colors.red[900],
+            child: Icon(Icons.hearing),
+            onPressed: (() => this.getList()),
           ),
         ],
       ),
     );
   }
 
-  Widget _hero() {
-    return Container();
+  Widget _showHeroes() {
+    if (this.heroes.heroes != null) {
+      return Container(
+        height: 475,
+        margin: EdgeInsets.only(bottom: 30),
+        child: ListView.builder(
+          itemCount: this.heroes.heroes.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(this.heroes.heroes[index].nombre),
+              subtitle: Text('Héroe a su servicio'),
+              leading: getIcon(this.heroes.heroes[index].icon,
+                  this.heroes.heroes[index].color),
+              trailing: Icon(Icons.keyboard_arrow_right),
+            );
+          },
+        ),
+      );
+    }
+    return Container(
+      padding: EdgeInsets.all(10),
+      child: Text(
+        'Presione el botón para ver nuestro listado de héroes disponibles :)',
+        textAlign: TextAlign.justify,
+      ),
+    );
   }
 
-  Future<void> getHeroes() async {
-    final response = await http.get(this.urlJSON, headers: this._headers);
-    Map heroesMap = jsonDecode(response.body);
-    var heroes = heroesMap['heroes'];
-    print(heroes);
+  void getList() async {
+    bool connectionAvailable = await Connected().isConnected();
+    (connectionAvailable)
+        ? this.heroes = await TestService().getLista()
+        : print('No hay conexión');
+
+    if (this.heroes != null) {
+      setState(() {});
+    }
+  }
+
+  void postSaludo() async {
+    bool connectionAvailable = await Connected().isConnected();
+    (connectionAvailable)
+        ? TestService().postGreeting()
+        : print('No hay internet');
   }
 }
