@@ -1,15 +1,13 @@
 # tarea2_ttm
 
-A new Flutter project.
+Tarea 2 de Taller de tecnologías móviles
 
-## Getting Started
+## Indicaciones
 
-This project is a starting point for a Flutter application.
+Crear una página con una lista (como en el primer programa, lista de héroes y sus colores), pero ahora debe obtener los datos desde un servicio a través de internet
+y NO desde los assets (utilizar el archivo heroes.json colgado en nuestra página: hectoralvarez.dev/icc727/heroes.json).
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+-----
 
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
