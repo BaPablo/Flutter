@@ -1,9 +1,9 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:tarea2_ttm/services/hero_service.dart';
 import 'package:tarea2_ttm/utils/connected.dart';
 import 'package:tarea2_ttm/models/heroes.dart';
-import 'package:tarea2_ttm/utils/hex_to_color_util.dart';
 import 'package:tarea2_ttm/utils/json_icon_util.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -58,7 +58,11 @@ class _HomeScreenState extends State<HomeScreen> {
           itemBuilder: (context, index) {
             return ListTile(
               title: Text(this.heroes.heroes[index].nombre),
-              subtitle: Text('Héroe a su servicio'),
+              subtitle: Text(
+                utf8.decode(
+                  this.heroes.heroes[index].poder.runes.toList(),
+                ),
+              ),
               leading: getIcon(this.heroes.heroes[index].icon,
                   this.heroes.heroes[index].color),
               trailing: Icon(Icons.keyboard_arrow_right),
