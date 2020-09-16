@@ -51,7 +51,12 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: () => {
           _eliminarDatos(),
           print('Datos eliminados'),
-          Navigator.of(context).pushReplacementNamed(LoginScreen.tag)
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => LoginScreen(),
+            ),
+          )
         },
       ),
     );

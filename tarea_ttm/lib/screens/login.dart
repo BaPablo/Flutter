@@ -90,24 +90,21 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Text('Iniciar sesión'),
         color: Colors.deepPurple,
         textColor: Colors.white,
-        onPressed: () => {
-          print('Username: ' + usernameController.text),
-          print('Password: ' + passwordController.text),
+        onPressed: () {
+          print('Username: ' + usernameController.text);
+          print('Password: ' + passwordController.text);
 
           // Validación contra datos del Map
 
           if (usernameController.text == usuario['nombreUsuario'] &&
-              passwordController.text == usuario['password'])
-            {
-              print('Login correcto'),
-              _guardarDatos(),
-              print('Datos guardados'),
-              Navigator.of(context).pushReplacementNamed(HomeScreen.tag)
-            }
-          else
-            {
-              _showAlert(),
-            }
+              passwordController.text == usuario['password']) {
+            print('Login correcto');
+            _guardarDatos();
+            print('Datos guardados');
+            Navigator.of(context).pushReplacementNamed(HomeScreen.tag);
+          } else {
+            _showAlert();
+          }
         },
       ),
     );
